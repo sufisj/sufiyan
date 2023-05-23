@@ -1,0 +1,45 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "cloudfront:ListConflictingAliases",
+                "cloudfront:ListInvalidations"
+            ],
+            "Resource": "arn:aws:cloudfront::241217904019:distribution/*"
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": [
+                "cloudfront:ListUsages",
+                "cloudfront:ListCloudFrontOriginAccessIdentities",
+                "cloudfront:ListResponseHeadersPolicies",
+                "cloudfront:ListDistributionsByCachePolicyId",
+                "cloudfront:ListFunctions",
+                "cloudfront:ListOriginAccessControls",
+                "cloudfront:ListFieldLevelEncryptionConfigs",
+                "cloudfront:ListDistributionsByLambdaFunction",
+                "cloudfront:ListCachePolicies",
+                "cloudfront:ListDistributionsByKeyGroup",
+                "cloudfront:ListOriginRequestPolicies",
+                "cloudfront:ListDistributionsByRealtimeLogConfig",
+                "cloudfront:ListPublicKeys",
+                "cloudfront:ListKeyGroups",
+                "cloudfront:ListSavingsPlans",
+                "cloudfront:ListRateCards",
+                "cloudfront:ListRealtimeLogConfigs",
+                "cloudfront:ListDistributions",
+                "cloudfront:ListFieldLevelEncryptionProfiles",
+                "cloudfront:ListContinuousDeploymentPolicies",
+                "cloudfront:ListStreamingDistributions",
+                "cloudfront:ListDistributionsByWebACLId",
+                "cloudfront:ListDistributionsByResponseHeadersPolicyId",
+                "cloudfront:ListDistributionsByOriginRequestPolicyId"
+            ],
+            "Resource": "*"
+        }
+    ]
+}

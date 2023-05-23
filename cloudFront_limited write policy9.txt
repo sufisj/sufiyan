@@ -1,0 +1,40 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "cloudfront:CreateOriginRequestPolicy",
+                "cloudfront:DeleteOriginRequestPolicy",
+                "cloudfront:DeleteFieldLevelEncryptionConfig",
+                "cloudfront:UpdateOriginRequestPolicy"
+            ],
+            "Resource": [
+                "arn:aws:cloudfront::241217904019:origin-request-policy/*",
+                "arn:aws:cloudfront::241217904019:field-level-encryption-config/*"
+            ]
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": [
+                "cloudfront:CreatePublicKey",
+                "cloudfront:CreateOriginAccessControl",
+                "cloudfront:UpdateKeyGroup",
+                "cloudfront:DeleteKeyGroup",
+                "cloudfront:UpdatePublicKey",
+                "cloudfront:CreateMonitoringSubscription",
+                "cloudfront:CreateSavingsPlan",
+                "cloudfront:CreateFieldLevelEncryptionProfile",
+                "cloudfront:UpdateSavingsPlan",
+                "cloudfront:UpdateFieldLevelEncryptionConfig",
+                "cloudfront:DeletePublicKey",
+                "cloudfront:CreateKeyGroup",
+                "cloudfront:CreateFieldLevelEncryptionConfig",
+                "cloudfront:DeleteMonitoringSubscription"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
