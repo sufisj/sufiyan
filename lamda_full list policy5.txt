@@ -1,0 +1,33 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "lambda:ListProvisionedConcurrencyConfigs",
+                "lambda:ListFunctionEventInvokeConfigs",
+                "lambda:ListFunctionsByCodeSigningConfig",
+                "lambda:ListVersionsByFunction",
+                "lambda:ListAliases",
+                "lambda:ListFunctionUrlConfigs"
+            ],
+            "Resource": [
+                "arn:aws:lambda:*:241217904019:code-signing-config:*",
+                "arn:aws:lambda:*:241217904019:function:*"
+            ]
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": [
+                "lambda:ListFunctions",
+                "lambda:ListEventSourceMappings",
+                "lambda:ListLayerVersions",
+                "lambda:ListLayers",
+                "lambda:ListCodeSigningConfigs"
+            ],
+            "Resource": "*"
+        }
+    ]
+}

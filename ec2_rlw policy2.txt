@@ -1,0 +1,43 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "rds:CopyDBClusterParameterGroup",
+                "rds:RestoreDBClusterFromSnapshot",
+                "rds:CreateBlueGreenDeployment",
+                "rds:DeregisterDBProxyTargets",
+                "rds:RestoreDBClusterFromS3",
+                "rds:ModifyDBProxyTargetGroup",
+                "rds:CreateDBCluster",
+                "rds:ModifyDBClusterParameterGroup",
+                "rds:ModifyDBCluster",
+                "rds:RegisterDBProxyTargets",
+                "rds:CreateDBClusterParameterGroup",
+                "rds:DeleteDBClusterParameterGroup",
+                "rds:ResetDBClusterParameterGroup",
+                "rds:RestoreDBClusterToPointInTime"
+            ],
+            "Resource": [
+                "arn:aws:rds:*:241217904019:cluster-pg:*",
+                "arn:aws:rds:*:241217904019:target-group:*"
+            ]
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": [
+                "rds:ModifyRecommendation",
+                "rds:ModifyCertificates",
+                "rds:CancelExportTask",
+                "rds:CrossRegionCommunication",
+                "rds:StartExportTask",
+                "rds:CreateDBProxy",
+                "rds:DeleteDBInstanceAutomatedBackup"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
