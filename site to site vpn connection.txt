@@ -1,0 +1,66 @@
+Steps	:
+  	
+
+
+
+
+1) Create VPC in Mumbai VPC-MainOffice 10.10.0.0/16 and another in Singapore VPC-BranchOffice 172.25.0.0/16
+	2) subnet selcet MainOffiec, Subnet-MainOffice, az-1, 10.10.1.0/24, tag key=Name, value=Subnet-MainOffice-Public
+	3) subnet select BranchOffice, Subnet-BranchOffice, az-1, 172.25.1.0/24, tag key=Name, value=Subnet-BranchOffice-Public
+	4) Create Internet Gateway, Name=igw-mob, Attach to VPC-Mainoffice
+	5) Create another Internet Gateway, Name=igw-bob, Attach to VPC-BranchOffice
+	6) rtb-mainoffice, route 0.0.0.0/0 to igw-mob
+	7) rtb-branchoffice, route 0.0.0.0/0 to igw-bob
+	8) EC-2 launch instance, mainoffice >> ami kernal 2, public ip enable,tag=Name,MOB-ec2, sg = SSH + ICMP 0.0.0.0/0, key pair mobkp, launch instance.
+	9) EC-2 launch instance, branchoffice >>ami kernel 2, public ip enable,tag=Name,Bo-ec2, sg = SSH + ICMP 0.0.0.0/0, key pair branchofficekp, launch instance.
+	10) select Branch office ec2 >> click on action >> networking change source/destination check >> stop
+	11) create virutal private gateway >> VPG-MainBranch >> create >> attach VPC to VPC-MainOffice
+	12) create customer gateway >> CGW-MainBranch >> static >> Copy BO public ip >> IP Address = public ip >> create
+	13) go to site-to-site VPN >> Create VPN Connection >> VPN-MainBranch >> VPG = VPG-MainBranch >> CGW = CGW-MainBranch >> Routing option = static >> 172.25.0.0/16 and 10.10.0.0/16 >> create VPN
+	14) SSH Branch office ec2 using mobaxterm >> $sudo su >> #yum install openswan -y
+	15) #sudo vim /etc/ipsec.conf
+     		we have to remove # from below line
+		include /etc/ipsec.d/*.conf
+	16) #sudo vim /etc/sysctl.conf
+	  	net.ipv4.ip_forword = 1
+		net.ipv4.conf.default.rp.filter = 0
+		net.ipv4.conf.default.accept_source_route = 0
+	17) Apply the changes in step 17 by executing the command 'sysctl -p'
+	18) Download VPN Configuration vendor=Openswan
+	19) #sudo vim /etc/ipsec.d/aws.conf
+		paste vpn configuration
+		conn Tunnel1
+			conn Tunnel1
+				authby=secret
+				auto=start
+				left=%defaultroute
+				leftid=3.109.209.42
+				right=3.7.22.232
+				type=tunnel
+				ikelifetime=8h
+				keylife=1h
+				phase2alg=aes128-sha1;modp1024
+				ike=aes128-sha1;modp1024
+				keyingtries=%forever
+				keyexchange=ike
+				leftsubnet=172.25.0.0/16
+				rightsubnet=10.10.0.0/16
+				dpddelay=10
+				dpdtimeout=30
+				dpdaction=restart_by_peer
+	20) #sudo vim /etc/ipsec.d/aws.secrets
+		Paste <<CGW IP>> <<VPG IP>>: PSK "paste pre-Shared key"
+		3.109.209.42 3.7.22.232: PSK "UoIZ9hplvQ9poZ2e3KRXq.SmCnmUch3I"
+	21) #cat /etc/ipsec.d/aws.secrets
+	22) #service network restart
+	23) #chkconfig ipsec on
+	24) #systemctl restart ipsec
+  	25) #systemctl status ipsec
+	26) go to Route table of VPC-MainOffice >> route propagation >> check propagate >> save
+  	27) check VPN connection status is available and Tunnel is up.
+	28) SSH MainOffice >> 
+		$ping BranchOffice Private IPv4
+		$exit
+	29) SSH BranchOffice >>
+		$ping MainOffice private IPv4
+		$exit
